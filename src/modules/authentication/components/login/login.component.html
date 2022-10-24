@@ -3,14 +3,13 @@
     <nz-form-item>
       <nz-form-label nzFor="username">Username</nz-form-label>
       <nz-form-control nzErrorTip="Please input your username!">
-          <input class="ant-input" type="text" name="username" id="username">
-
+          <input required class="ant-input" type="text" name="username" id="username" [(ngModel)]="model.username" #username="ngModel">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="password">Mot de passe</nz-form-label>
       <nz-form-control nzErrorTip="Please input your Password!">
-          <input class="ant-input" type="password" name="password" id="password" >
+          <input required class="ant-input" type="password" name="password" id="password" [(ngModel)]="model.password" #password="ngModel">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

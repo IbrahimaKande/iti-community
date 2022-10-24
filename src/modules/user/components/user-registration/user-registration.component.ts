@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { UserQueries } from '/Users/ibrahimakande/Documents/Perso/iti-community/src/modules/user/services/user.queries';
 
 class UserRegistrationFormModel {
   username = "";
@@ -22,7 +23,8 @@ export class UserRegistrationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private userQueries: UserQueries
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,15 @@ export class UserRegistrationComponent implements OnInit {
     }
 
     // TODO Enregistrer l'utilisateur via le UserService
-    this.userService.register(this.model.username, this.model.password);
-    this.goToLogin();
+    console.log((await this.userQueries.exists(this.model.username)))
+    if(!await this.userQueries.exists(this.model.username)){
+      this.userService.register(this.model.username, this.model.password);
+      this.goToLogin();
+    }
+    else{
+      alert("Username already used")
+    }
+    
   }
 
   goToLogin() {
