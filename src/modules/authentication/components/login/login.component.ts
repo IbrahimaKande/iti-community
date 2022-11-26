@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/'])
       }
       else{
-        alert("Authentication failed");
+        this.nzMessageService.error("Username or password incorrect");
       };
 
     } catch (e) {

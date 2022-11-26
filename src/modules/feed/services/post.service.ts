@@ -13,7 +13,8 @@ export class PostService {
         private queries: PostQueries,
         private userStore: UserStore,
         private mapper: PostMapper,
-        private store: FeedStore) {
+        private store: FeedStore, 
+        private postCommands: PostCommands) {
     }
 
     async create(roomId: string, message: string, file?: File): Promise<PostData> {
@@ -32,5 +33,6 @@ export class PostService {
 
     like(post: Post) {
       // TODO appeler la méthode like sur PostCommands
+      this.postCommands.like(post.roomId, post.id)
     }
 }

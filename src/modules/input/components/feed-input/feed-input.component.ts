@@ -26,7 +26,7 @@ export class FeedInputComponent {
   /**
    * Staging file to upload
    */
-  file: File | null = null;
+  file: File | undefined = undefined
 
   currentMention?: RegExpMatchArray;
 
@@ -78,12 +78,12 @@ export class FeedInputComponent {
    * Close tag event handler. Trigger when the user wants to remove a file.
    */
   onCloseTag() {
-    this.setFile(null);
+    this.setFile(undefined);
   }
 
   /**
   * Event handler
-  * @param file the file privded by the user
+  * @param file the file provided by the user
   */
   onFileUpload = (file: File) => {
     this.setFile(file);
@@ -131,13 +131,15 @@ export class FeedInputComponent {
 
     // TODO émettre  l'évènement "messageSent" via la méthode fireMessageSent
     // TODO vider la zone de saise avec la méthode clear
+    this.fireMessageSent()
+    this.clear()
   }
 
   /**
    * Set an allowed file to send with the input message
    * @param file The file to send with the message
    */
-  setFile(file: File | null) {
+  setFile(file: File | undefined) {
     this.file = file;
   }
 
@@ -146,6 +148,12 @@ export class FeedInputComponent {
    */
   fireMessageSent() {
     // TODO émettre l'évènement "messageSent"
+    let message : MessageSentEventPayload = {
+      date: new Date(),
+      message: this.message, 
+      file: this.file
+    }
+    console.log(this.messageSent.emit(message))
   }
 
   /**
@@ -153,7 +161,7 @@ export class FeedInputComponent {
    */
   clear() {
     this.message = "";
-    this.setFile(null);
+    this.setFile(undefined);
     this.inputPopover.hide();
   }
 }

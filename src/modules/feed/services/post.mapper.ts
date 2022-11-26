@@ -10,7 +10,7 @@ export class PostMapper {
 
   private parseMessage(message: string): PostMessage {
     // TODO rajouter png jpg et gif
-    const pictureRegex = /http[s]?:\/\/.+\.(jpeg|jpg)/gmi;
+    const pictureRegex = /http[s]?:\/\/.+\.(jpeg|jpg|png|gif)/gmi;
 
      // TODO mp4,wmv,flv,avi,wav
     const videoRegex = / /gmi;
@@ -24,23 +24,25 @@ export class PostMapper {
     const pictureMatche = pictureRegex.exec(message);
     if (pictureMatche) {
      // TODO ajouter un attachement de type image dans attachements
+     attachements.push({type: 'image', url: message})
     }
 
     const videoMatche = videoRegex.exec(message)
     if (videoMatche) {
      // TODO ajouter un attachement de type video dans attachements
-
+     attachements.push({type: 'video', url: message})
     }
 
     const audioMatche = audioRegex.exec(message)
     if (audioMatche) {
      // TODO ajouter un attachement de type audio dans attachements
-
+     attachements.push({type: 'audio', url: message})
     }
 
     const youtubeMatche = youtubeRegex.exec(message)
     if (youtubeMatche) {
      // TODO ajouter un attachement de type youtube dans attachements
+     attachements.push({type: 'youtube', videoId: message})
     }
 
     return {
