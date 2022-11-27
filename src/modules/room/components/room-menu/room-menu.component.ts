@@ -31,6 +31,7 @@ export class RoomMenuComponent implements OnInit {
 
   async ngOnInit() {
     this.rooms = await this.queries.getAll();
+    this.goToRoom(this.rooms[0])
   }
 
   goToRoom(room: Room) {

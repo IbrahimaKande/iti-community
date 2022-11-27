@@ -18,7 +18,7 @@ export class PostAttachementYoutubeComponent implements OnInit {
   ) { }
 
   get url() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.element.videoId);
+    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.element.videoId.slice(32, 43))
   }
 
   ngOnInit(): void {
