@@ -34,11 +34,12 @@ export class UserRegistrationComponent implements OnInit {
 
     // TODO  Vérifier que la confirmation de mot de passe correspond au mot de passe
     if (this.form.form.invalid || this.model.password !== this.model.confirmPassword || this.model.confirmPassword !== this.model.password) {
+      alert("Password and Confirm Password are not the same")
       return;
     }
 
     // TODO Enregistrer l'utilisateur via le UserService
-    console.log((await this.userQueries.exists(this.model.username)))
+    await this.userQueries.exists(this.model.username)
     if(!await this.userQueries.exists(this.model.username)){
       this.userService.register(this.model.username, this.model.password);
       this.goToLogin();
